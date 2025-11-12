@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <windows.h>
+#include <vector>
+#include <thread>
+#include <chrono>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,7 +24,9 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    std::vector<HWND> m_hwnds;
+
 private slots:
-    void on_hookButton_pushed();
+    void on_hookButton_clicked();
 };
 #endif // MAINWINDOW_H
