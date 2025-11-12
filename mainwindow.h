@@ -7,6 +7,15 @@
 #include <thread>
 #include <chrono>
 
+class QLineEdit;
+class QPushButton;
+class QVBoxLayout;
+
+struct HookedWindow {
+    HWND hwnd;
+    std::string title;
+};
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -22,11 +31,15 @@ public:
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
+    void addHookedWindowUI(const HookedWindow& windowInfo);
+    QVBoxLayout* m_mainLayout;
 
-    std::vector<HWND> m_hwnds;
+    QLineEdit* m_windowTitleInput;
+    QPushButton* m_hookButton;
+
+    std::vector<HookedWindow> m_hookedWindows;
 
 private slots:
-    void on_hookButton_clicked();
+    void onHookNewWindow();
 };
 #endif // MAINWINDOW_H
